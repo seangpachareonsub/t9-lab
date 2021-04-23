@@ -1,42 +1,61 @@
 import './App.css';
 import React, { useEffect, useState } from 'react'
 import Screen from './screen/Screen'
-import Keyboard from './keyboard/Keyboard'
+import Keypad from './keypad/Keypad'
 import axios from 'axios'
+
 
 function App() {
 
   const [numInput, setNumInput] = useState()
   const [textSuggestion, setTextSuggestion] = useState()
 
-  useEffect(() => {
 
+  useEffect(() => {
     if (!numInput) return
 
     axios.post('/api/suggestions', { input: numInput })
-    .then(res => {
-      console.log(res.data.suggestions)
-      setTextSuggestion(res.data.suggestions)
-    })
+      .then(res => {
+        console.log(res.data.suggestions)
+        setTextSuggestion(res.data.suggestions)
+      })
 
   }, [numInput])
-  
+
+
+  const handleInputChange = (e) => {
+    const { label } = e.target.dataset
+
+    if (!numInput) {
+      return setNumInput(label)
+    }
+    if (label === '<') {
+      return setNumInput(numInput.slice(0, -1))
+    }
+
+    setNumInput(numInput.concat(label))
+  }
+
+  const currentOnScreenText = textSuggestion ? textSuggestion[0].slice(0, numInput.length) : ''
+
   return (
-    <div style={{ display: 'grid', height: '100vh', placeContent: 'center' }}>
+    <div className='container__inner-screen'>
 
-      <h1> T9 Predictive Text Lab </h1>
+      <Screen
+        currentOnScreenText={currentOnScreenText}
+      />
 
-      <Screen textSuggestion={textSuggestion && textSuggestion[0].slice(0, numInput.length)} />
+      <Keypad
+        numInput={numInput}
+        currentOnScreenText={currentOnScreenText}
+        textSuggestion={textSuggestion}
+        handleInputChange={handleInputChange}
+      />
 
-      <div style={{ border: '1px solid black', height: '30px', width: '100%', margin: '1rem 0'}}>
-        {textSuggestion?.slice(0, 4).map((word, i) => {
-          return <span key={i}> { word } </span>
-        })}
-      </div>
-
-      <Keyboard numInput={numInput} setNumInput={setNumInput} />
     </div>
-  );
+
+
+  )
 }
 
 export default App;

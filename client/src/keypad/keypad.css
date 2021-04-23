@@ -1,0 +1,72 @@
+.suggestion-bar {
+  width: 100%;
+  flex: 0.2;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.25rem 0;
+}
+
+.suggestion-bar__text {
+  font-size: 0.9rem;
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+}
+
+.suggestion-bar__text:not(:last-child) {
+  border-right: 1px solid black;
+}
+
+
+.keypad {
+  width: 97%;
+  padding-bottom: 2.5rem;
+  flex: 1;
+  border-bottom-right-radius: 44px;
+  border-bottom-left-radius: 44px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  row-gap: 4px;
+  column-gap: 4px;
+}
+
+.keypad__button {
+  text-align: center;
+  background-color: rgb(231, 231, 231);
+  border-radius: 5px;
+  position: relative;
+}
+
+.keypad__button:hover {
+  background-color: rgb(211, 211, 211);
+  cursor: pointer;
+  user-select: none;
+}
+
+.keypad__button--space {
+  grid-column: 1 / 5;
+}
+
+.keypad__button--delete {
+  grid-row: 1 / 4;
+  grid-column: 4;
+}
+
+.keypad__button h6 {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  font-size: 1.1rem;
+}
+
+.keypad__button small {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  font-size: 0.65rem;
+}
+

@@ -1,11 +1,12 @@
 import React from 'react';
+import './screen.css';
 
-const Screen = ({ textSuggestion }) => {
+const Screen = ({
+  currentOnScreenText
+}) => {
 
   return (
-
-    <textarea value={textSuggestion} rows='10' readOnly/>
-
+    <textarea class='screen' value={currentOnScreenText} rows='10' readOnly />
   );
 };
 
