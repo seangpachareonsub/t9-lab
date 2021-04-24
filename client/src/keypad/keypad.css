@@ -64,6 +64,7 @@
 }
 
 .keypad__button small {
+  pointer-events: none;
   position: absolute;
   bottom: 3px;
   right: 3px;

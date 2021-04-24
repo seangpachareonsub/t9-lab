@@ -6,17 +6,18 @@ import { keys } from '../utils/keys'
 const Keyboard = ({
   handleInputChange,
   numInput,
-  textSuggestion,
-  currentOnScreenText }) => {
+  predictiveText,
+  onScreenText
+}) => {
 
   return (
 
     <>
       <div className='suggestion-bar'>
-        {textSuggestion?.slice(0, 4).map((word, i) => {
+        {predictiveText?.slice(0, 4).map((word, i) => {
           return (
             <span key={i} className='suggestion-bar__text'>
-              {word === currentOnScreenText ? `"${word}"` : word}
+              {word === onScreenText ? `"${word}"` : word}
             </span>
           )
         })}
@@ -30,7 +31,7 @@ const Keyboard = ({
           return (
             <div
               key={i}
-              className={`keypad__button ${['0', '<'].includes(label) && `keypad__button--${action}`}`}
+              className={`keypad__button ${['0', '←'].includes(label) && `keypad__button--${action}`}`}
               data-label={label}
               onClick={label !== '1' ? (e) => handleInputChange(e) : undefined}>
 

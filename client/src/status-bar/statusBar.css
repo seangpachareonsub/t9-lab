@@ -1,0 +1,20 @@
+.status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 81% repeat(3, 5%);
+  padding: 0.5rem 2rem;
+  column-gap: 6px;
+}
+
+.status-bar span {
+  font-size: 0.80rem;
+  font-weight: bold;
+}
+
+.status-bar__img {
+  width: 15px;
+}
+

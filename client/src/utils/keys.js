@@ -9,5 +9,5 @@ export const keys = [
   { label: '8', action: 'tuv' },
   { label: '9', action: 'wxyz' },
   { label: '0', action: 'space' },
-  { label: '<', action: 'delete' },
+  { label: '←', action: 'delete' },
 ]

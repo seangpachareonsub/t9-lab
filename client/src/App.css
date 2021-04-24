@@ -12,7 +12,7 @@
   background-color: rgb(235, 235, 235);
 }
 
-.container__inner-screen {
+.container__outer-screen {
   position: relative;
   width: 350px;
   height: 700px;
@@ -25,13 +25,13 @@
   background-color: white;
 }
 
-.container__inner-screen::before {
+.container__outer-screen::before {
   content: "";
   position: absolute;
   width: 160px;
-  height: 18px;
+  height: 22px;
   background-color: black;
-  border-bottom-right-radius: 0.7rem;
-  border-bottom-left-radius: 0.7rem;
+  border-bottom-right-radius: 0.9rem;
+  border-bottom-left-radius: 0.9rem;
 }
 

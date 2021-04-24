@@ -2,11 +2,11 @@ import React from 'react';
 import './screen.css';
 
 const Screen = ({
-  currentOnScreenText
+  onScreenText
 }) => {
 
   return (
-    <textarea class='screen' value={currentOnScreenText} rows='10' readOnly />
+    <textarea className='screen' value={onScreenText?.join(' ')} rows='10' readOnly />
   );
 };
 
