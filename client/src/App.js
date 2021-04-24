@@ -27,19 +27,18 @@ function App() {
 
     if (numInput.includes('')) return // do not make API call if there is an empty element
 
-    axios.post('/', { input: lastNum }) // only POST last element
+    axios.post('/suggestions', { input: lastNum }) // only POST last element
       .then(res => {
         const { data } = res
         const restOfElements = onScreenTextRef.current.slice(0, onScreenTextRef.current.length - 1)
         const lastWord = data[0].slice(0, lastNum.length)
 
+        console.log(data)
+
         setOnScreenText([...restOfElements, lastWord]) // on screen text length matches input length
         setPredictiveText(data)
-
-        // console.log({ numInput, tezt: onScreenTextRef.current })
       })
 
-    
 
   }, [numInput])
 
@@ -48,7 +47,11 @@ function App() {
 
     const { label } = e.target.dataset
 
-    if (!numInput || numInput.length === 0) { // case for the first digit input
+    console.log(label)
+
+    if (/[0←]/.test(label) && (!numInput || numInput.length === 0)) return // prevents space and delete as first input
+
+    if (!numInput || numInput.length === 0) { // case for the first valid digit input 
       return setNumInput([label])
     }
 
@@ -58,8 +61,6 @@ function App() {
     const restOfTextElements = onScreenText.slice(0, onScreenText.length - 1)
 
     if (label === '←') { // deleting digit
-
-      if (!lastNum) return // prevents delete click when already empty
 
       function removeDigits(arr, element) {
         return [...arr
@@ -73,16 +74,28 @@ function App() {
     }
 
     if (label === '0') {
-      if (!lastNum || !numInput) return // adding space only if there isn't already
+      if (!lastNum) return // prevents additional space when already there
       setNumInput([...numInput, ''])
       setOnScreenText([...onScreenText, ''])
+      setPredictiveText()
       return
     }
 
-    setNumInput([...restOfNumElements.concat(lastNum + label)]) // default case
+    setNumInput([ ...restOfNumElements.concat(lastNum + label) ]) // default case
   }
 
 
+  const handleAutoComplete = (word) => {
+    axios.post('/auto-complete', { word })
+    .then(res => {
+      const restOfNumElements = numInput.slice(0, numInput.length - 1)
+      const restOfTextElements = onScreenText.slice(0, onScreenText.length - 1)
+
+      setOnScreenText([ ...restOfTextElements, word, '' ])
+      setNumInput([ ...restOfNumElements, res.data.toString(), '' ])
+      setPredictiveText()
+    })
+  }
 
 
 
@@ -95,6 +108,7 @@ function App() {
         onScreenText={onScreenText} />
 
       <Keypad
+        handleAutoComplete={handleAutoComplete}
         numInput={numInput}
         predictiveText={predictiveText}
         handleInputChange={handleInputChange}

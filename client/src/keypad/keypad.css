@@ -1,17 +1,30 @@
 .suggestion-bar {
   width: 100%;
-  flex: 0.2;
+  flex: 0.22;
   display: flex;
-  justify-content: space-around;
+  position: relative;
   align-items: center;
-  padding: 0.25rem 0;
+  padding: 0.3rem 0;
+  overflow-x: scroll;
+}
+
+.suggestion-bar::-webkit-scrollbar {
+  display: none;
 }
 
 .suggestion-bar__text {
   font-size: 0.9rem;
   flex: 1;
+  min-width: 28%;
   text-align: center;
   overflow: hidden;
+  padding: 0.1rem 0;
+  user-select: none;
+}
+
+.suggestion-bar__text:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .suggestion-bar__text:not(:last-child) {
@@ -45,13 +58,19 @@
   user-select: none;
 }
 
+.keypad__button:first-of-type {
+  cursor: not-allowed;
+}
+
 .keypad__button--space {
   grid-column: 1 / 5;
+  user-select: none;
 }
 
 .keypad__button--delete {
   grid-row: 1 / 4;
   grid-column: 4;
+  user-select: none;
 }
 
 .keypad__button h6 {

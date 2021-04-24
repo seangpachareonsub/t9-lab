@@ -1,5 +1,5 @@
 module.exports = [
-  { label: '1' },
+  { label: '1', action: '' },
   { label: '2', action: 'abc' },
   { label: '3', action: 'def' },
   { label: '4', action: 'ghi' },

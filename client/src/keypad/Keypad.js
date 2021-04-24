@@ -7,17 +7,21 @@ const Keyboard = ({
   handleInputChange,
   numInput,
   predictiveText,
-  onScreenText
+  onScreenText,
+  handleAutoComplete
 }) => {
 
   return (
 
     <>
       <div className='suggestion-bar'>
-        {predictiveText?.slice(0, 4).map((word, i) => {
+
+        {predictiveText?.map((word, i) => {
           return (
-            <span key={i} className='suggestion-bar__text'>
-              {word === onScreenText ? `"${word}"` : word}
+            <span key={i}
+              onClick={() => handleAutoComplete(word)}
+              className='suggestion-bar__text'>
+              {word === onScreenText[onScreenText.length - 1] ? `"${word}"` : word}
             </span>
           )
         })}
