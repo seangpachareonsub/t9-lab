@@ -13,7 +13,8 @@ const Keyboard = ({
 
   return (
 
-    <>
+    <div className='keypad-container'>
+
       <div className='suggestion-bar'>
 
         {predictiveText?.map((word, i) => {
@@ -52,7 +53,13 @@ const Keyboard = ({
         })}
 
       </div>
-    </>
+
+      <div className="keypad__toolbar">
+        <img className='keypad__icons' src="https://www.flaticon.com/svg/vstatic/svg/3083/3083741.svg?token=exp=1619300906~hmac=cc3515c801a5a283c82bc49ff3afde30" alt="world" />
+        <img className='keypad__icons' src="https://www.flaticon.com/svg/vstatic/svg/1082/1082810.svg?token=exp=1619300952~hmac=2223233649c5a41bb3e455dc4a900ad5" alt="microphone" />
+      </div>
+
+    </div>
   );
 };
 

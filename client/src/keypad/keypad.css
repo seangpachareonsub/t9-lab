@@ -1,10 +1,22 @@
+.keypad-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  background-color: rgb(230, 230, 230);
+  border-bottom-right-radius: 44px;
+  border-bottom-left-radius: 44px;
+}
+
 .suggestion-bar {
   width: 100%;
-  flex: 0.22;
+  flex: 0.2;
   display: flex;
   position: relative;
   align-items: center;
-  padding: 0.3rem 0;
+  padding: 0.3rem;
   overflow-x: scroll;
 }
 
@@ -18,42 +30,41 @@
   min-width: 28%;
   text-align: center;
   overflow: hidden;
-  padding: 0.1rem 0;
+  padding: 0.4rem 0;
   user-select: none;
+  font-weight: 500;
+  border-radius: 5px;
 }
 
 .suggestion-bar__text:hover {
   cursor: pointer;
-  text-decoration: underline;
-}
-
-.suggestion-bar__text:not(:last-child) {
-  border-right: 1px solid black;
+  background-color: rgb(207, 207, 207);
 }
 
 
 .keypad {
   width: 97%;
-  padding-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
   flex: 1;
   border-bottom-right-radius: 44px;
   border-bottom-left-radius: 44px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  row-gap: 4px;
-  column-gap: 4px;
+  row-gap: 6px;
+  column-gap: 6px;
 }
 
 .keypad__button {
   text-align: center;
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(245, 245, 245);
   border-radius: 5px;
   position: relative;
+  box-shadow: 0 4px 1px -2px rgb(175, 175, 175);
 }
 
 .keypad__button:hover {
-  background-color: rgb(211, 211, 211);
+  background-color: rgb(237, 237, 237);
   cursor: pointer;
   user-select: none;
 }
@@ -75,7 +86,7 @@
 
 .keypad__button h6 {
   position: absolute;
-  top: 45%;
+  top: 47%;
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -88,5 +99,17 @@
   bottom: 3px;
   right: 3px;
   font-size: 0.65rem;
+}
+
+.keypad__toolbar {
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-12px);
+  width: 80%
+}
+
+.keypad__icons {
+  width: 20px;
+  cursor: not-allowed;
 }
 
