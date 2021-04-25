@@ -1,6 +1,6 @@
 # T9 Predictive Text
 
-This is a small web app that emulates T9 predictive text. As the user types numbers into the input,predicted words will be shown.
+This is a small web app that emulates T9 predictive text. As the user types numbers into the input, predicted words will be shown.
 
 <img width='45%'  src='./.github/phone.png' />
 
