@@ -22,7 +22,7 @@ cd client
 npm start
 ```
 
-This will start the frontend UI runs on localhost:3000
+This will start the frontend UI which runs on localhost:3000
 
 
 ## Task
