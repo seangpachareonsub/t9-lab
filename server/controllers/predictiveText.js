@@ -1,5 +1,6 @@
 const words = require('../constants/words')
 const keys = require('../constants/keys')
+const _ = require('lodash')
 
 
 exports.handleAutoComplete = (request, h) => {
@@ -23,17 +24,37 @@ exports.handleSuggestText = (request, h) => {
 
   const { input } = request.payload
 
-  const letterCombinationArr = input
-    .split('')
-    .map(num => { // return each num input letter action
-      const item = keys.find(item => item.label === num)
 
-      if (item) {
-        return item.action.split('')
+  const generateLetterCombination = num => {
+    return num
+      .split('')
+      .map(digit => { // return each num input letter action
+        const item = keys.find(item => item.label === digit)
+
+        if (item) {
+          return item.action.split('')
+        }
+      })
+  }
+
+  const generateRecursion = arr => {
+    if (arr.length === 1) { // base case
+      return arr[0]
+    } else {
+      const result = []
+      const allCasesOfRest = generateRecursion(arr.slice(1)) // recur with the rest of array
+
+      for (let i = 0; i < allCasesOfRest.length; i++) {
+        arr[0].forEach(root => {
+          result.push(root + allCasesOfRest[i])
+        })
       }
-    })
 
-  function findMatchingWords(arr) {
+      return result
+    }
+  }
+
+  const findMatchingWords = arr => {
 
     if (arr.length < 5) { // base case for only 1 number button being pressed
       return [arr[0]]
@@ -61,26 +82,9 @@ exports.handleSuggestText = (request, h) => {
     return suggestions
   }
 
-  function generateRecursion(arr) {
-    if (arr.length === 1) { // base case
-      return arr[0]
-    } else {
-      const result = []
-      const allCasesOfRest = generateRecursion(arr.slice(1)) // recur with the rest of array
+  const transform = _.flow([generateLetterCombination, generateRecursion, findMatchingWords])
 
-      for (let i = 0; i < allCasesOfRest.length; i++) {
-        arr[0].forEach(root => {
-          result.push(root + allCasesOfRest[i])
-        })
-      }
-
-      return result
-    }
-  }
-
-  const allPossibleCombinations = generateRecursion(letterCombinationArr)
-
-  const suggestions = findMatchingWords(allPossibleCombinations)
+  const suggestions = transform(input)
 
   return suggestions.length !== 0 ? suggestions : [input]
 }

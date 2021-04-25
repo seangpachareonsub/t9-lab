@@ -1,26 +1,26 @@
 import React from 'react';
-import './keypad.css';
-import { keys } from '../utils/keys'
+import './Keypad.css';
+import { keys } from '../../constants/keys'
+import { useSelector, useDispatch } from 'react-redux'
+import { inputChange } from '../../redux/actions'
 
+const Keyboard = ({ 
+  handleRequest, 
+  responseIsLoading }) => {
 
-const Keyboard = ({
-  handleInputChange,
-  numInput,
-  predictiveText,
-  onScreenText,
-  handleAutoComplete
-}) => {
+  const dispatch = useDispatch()
+  const onScreenText = useSelector(state => state.onScreenText)
+  const suggestedText = useSelector(state => state.suggestedText)
 
   return (
 
     <div className='keypad-container'>
-
       <div className='suggestion-bar'>
 
-        {predictiveText?.map((word, i) => {
+        {suggestedText.map((word, i) => {
           return (
             <span key={i}
-              onClick={() => handleAutoComplete(word)}
+              onClick={!responseIsLoading ? () => handleRequest('/auto-complete', { word }) : undefined}
               className='suggestion-bar__text'>
               {word === onScreenText[onScreenText.length - 1] ? `"${word}"` : word}
             </span>
@@ -38,7 +38,7 @@ const Keyboard = ({
               key={i}
               className={`keypad__button ${['0', '←'].includes(label) && `keypad__button--${action}`}`}
               data-label={label}
-              onClick={label !== '1' ? (e) => handleInputChange(e) : undefined}>
+              onClick={(label !== '1' || !responseIsLoading) ? (e) => dispatch(inputChange(e)) : undefined}>
 
               <h6>
                 {label}

@@ -1,5 +1,5 @@
 import React from 'react';
-import './statusBar.css'
+import './StatusBar.css'
 import moment from 'moment'
 
 const StatusBar = () => {
