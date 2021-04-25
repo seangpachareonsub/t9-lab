@@ -14,12 +14,11 @@ function App() {
 
   // states
   const state = useSelector(state => state)
-  const number = useSelector(state => state.number)
-  const onScreenText = useSelector(state => state.onScreenText)
+  const { number, onScreenText } = state
 
   const [responseIsLoading, setResponseIsLoading] = useState(false)
   const lastNum = number[number.length - 1]
-
+  
 
   // function for api calls
   const handleRequest = (endpoint, body) => {
@@ -35,7 +34,6 @@ function App() {
         const remainingTextElements = onScreenText.slice(0, onScreenText.length - 1)
 
         if (endpoint === '/suggestions') {
-
           const lastWord = data[0].slice(0, lastNum.length)
 
           dispatch(promiseSuccess({
@@ -43,9 +41,9 @@ function App() {
             onScreenText: [...remainingTextElements, lastWord],
             suggestedText: data
           }))
+        }
 
-        } else {
-
+        if (endpoint === '/auto-complete') {
           const remainingNumElements = number.slice(0, number.length - 1)
 
           dispatch(promiseSuccess({
@@ -56,7 +54,6 @@ function App() {
         }
 
         setResponseIsLoading(false)
-    
       })
       .catch(err => {
         setResponseIsLoading(false)

@@ -26,20 +26,14 @@ const inputReducer = (
       const { label } = action.payload
 
       // return state since 1 does nothing
-      if (label === '1') {
-        return state
-      }
+      if (label === '1') return state
 
       // prevents 0 and delete as first input
       if (/[0←]/.test(label) &&
-        (!number || number.length === 0)) {
-
-        return initialState
-      }
+        (!number || number.length === 0)) return initialState
 
       // first valid input 
       if (!number || number.length === 0) {
-
         return {
           ...state,
           number: [label]
@@ -65,16 +59,14 @@ const inputReducer = (
       }
 
       if (label === '0') {
-
         // prevents additional space when already there
-        if (!lastNum) return state 
+        if (!lastNum) return state
 
         return {
           ...state,
           number: [...number, ''],
-
           // remove suggested texts on start of new word
-          suggestedText: [], 
+          suggestedText: [],
           onScreenText: [...onScreenText, '']
         }
       }

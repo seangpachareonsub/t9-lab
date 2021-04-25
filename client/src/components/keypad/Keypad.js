@@ -2,7 +2,7 @@ import React from 'react';
 import './Keypad.css';
 import microphone from '../../assets/microphone.png'
 import world from '../../assets/world.png'
-import { keys } from '../../constants/keys'
+import { keys } from '../../constants'
 import { useSelector, useDispatch } from 'react-redux'
 import { inputChange } from '../../redux/actions'
 
@@ -11,8 +11,7 @@ const Keyboard = ({ handleRequest }) => {
   const dispatch = useDispatch()
 
   // states
-  const onScreenText = useSelector(state => state.onScreenText)
-  const suggestedText = useSelector(state => state.suggestedText)
+  const { onScreenText, suggestedText } = useSelector(state => state)
 
   return (
 

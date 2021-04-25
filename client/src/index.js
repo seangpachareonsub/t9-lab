@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux'
 import inputReducer from './redux/reducers/input'
 import { Provider } from 'react-redux'
@@ -18,3 +19,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+reportWebVitals();
