@@ -37,16 +37,14 @@ I began picturing the old retro phones that needed at least 2 presses on a singl
 
 I set up a create-react-app project and built out 2 main components,keypad and screen. Considering the size of the app, I kept styling to a minimum and wrote with traditional CSS files rather than a pre-processor like SCSS. 
 
-My instinctive approach was to use what I knew best, in the form of React hooks, notably useContext and useReducer to manage the state and an Express powered backend.
-
-However, I wanted to showcase my abilities to learn quickly and use technologies that I had not used prior or at least not used for a period of time. Therefore, I migrated over to a Hapi server from Express and transferred over to Redux to manage the app's state.
+My instinctive approach was to use what I knew best, in the form of React hooks, notably useContext and useReducer to manage the state and an Express powered backend. However, I wanted to showcase my abilities to learn quickly and use technologies that I had not used prior or at least not used for a period of time. Therefore, I migrated over to a Hapi server from Express and transferred over to Redux to manage the app's state.
 
 As a result, I was able to develop the main features listed below and include comments around the codebase, reasoning and detailing how each function works and why. Hopefully it all makes sense!
 
 ### Features
 
 - T9 predictive text
-- Auto-complete from list of preditive text
+- Auto-complete from list of predictive text
 - Clean and basic UI
 
 ## Project Overview & Setup
@@ -115,5 +113,5 @@ Therefore, I found that inputting or deleting long words will result in the app 
 ### Future Implentations
 
 - At the moment, the app doesn't support punctuations and presses on the 1 button are ignored so would be good to see how that's implemented into the app.
-- A Redux undo state impletation so deletion of characters wouldn't need to trigger API calls to fetch a list of words. Some form of a tracker could cache all the data that comes back and we could access that for previous states on delete. 
+- A Redux undo state impletation so deletion of characters wouldn't need to trigger API calls to fetch a list of words. Some form of a tracker that could cache all the data that comes back and we could access that for previous states on delete. 
 - It would have been nice to see how the app would perform on a React Native platform 
