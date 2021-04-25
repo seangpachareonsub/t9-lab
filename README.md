@@ -112,6 +112,6 @@ Therefore, I found that inputting or deleting long words will result in the app 
 
 ### Future Implentations
 
-- At the moment, the app doesn't support punctuations and presses on the 1 button are ignored so would be good to see how that's implemented into the app.
+- At the moment, the app doesn't support punctuations and grammar (i.e capitalisation) and presses on the 1 button are ignored so would be good to see how that's implemented into the app.
 - A Redux undo state impletation so deletion of characters wouldn't need to trigger API calls to fetch a list of words. Some form of a tracker that could cache all the data that comes back and we could access that for previous states on delete. 
 - It would have been nice to see how the app would perform on a React Native platform 
