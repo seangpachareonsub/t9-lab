@@ -112,7 +112,7 @@ Part of the backend includes a recursive function that generates all possible le
 Therefore, I found that inputting or deleting long words will result in the app hanging, especially in cases where buttons are pressed quickly due to the time taken for the API to respond. Shorter words (up to 5 characters) perform seamlessly since they take less time to compute.
 
 
-### Future Implentations
+### Future Implementations
 
 - At the moment, the app doesn't support punctuations and grammar (i.e capitalisation) and presses on the 1 button are ignored so would be good to see how that's implemented into the app.
 - A Redux undo state impletation so deletion of characters wouldn't need to trigger API calls to fetch a list of words. Some form of a tracker that could cache all the data that comes back and we could access that for previous states on delete. 
