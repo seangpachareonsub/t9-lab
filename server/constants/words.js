@@ -3216,7 +3216,7 @@ module.exports = [
   'theta',
   'stake',
   'arbor',
-  'poison'
+  'poison',
   'search',
   'online',
   'people',

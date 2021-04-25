@@ -1,12 +1,12 @@
-## T9 Predictive Text
+# T9 Predictive Text
 
 This is a small web app that emulates T9 predictive text. As the user types numbers into the input,predicted words will be shown.
 
-### Getting Started
+## Getting Started
 
 This project was bootstrapped using the [Create React App](https://github.com/facebook/create-react-app) toolkit.
 
-#### Getting the code
+### Getting the code
 
 To serve the app on your local machine, run the following commands:
 
@@ -25,13 +25,13 @@ npm start
 This will start the frontend UI runs on localhost:3000
 
 
-### Task
+## Task
 
-#### Description
+### Description
 
 The task was to create a number to word list converter in the style of T9 Predictive Text, as a Node backend and React/Redux frontend
 
-#### Approach
+### Approach
 
 I began picturing the old retro phones that needed at least 2 presses on a single button to bring up a specific letter and wanted to recreate something as an extension of that. I opted for a unique blend of retro in the style of T9 and the design of modern phones.
 
@@ -43,15 +43,15 @@ However, I wanted to showcase my abilities to learn quickly and use technologies
 
 As a result, I was able to develop the main features listed below and include comments around the codebase, reasoning and detailing how each function works and why. Hopefully it all makes sense!
 
-#### Features
+### Features
 
 - T9 predictive text
 - Auto-complete from list of preditive text
 - Clean and basic UI
 
-### Project Overview & Setup
+## Project Overview & Setup
 
-#### Technologies
+### Technologies
 
 - React
 - Redux
@@ -59,7 +59,7 @@ As a result, I was able to develop the main features listed below and include co
 - Node
 - JSX/HTML/CSS
 
-#### Methodologies
+### Methodologies
 
 - Functional programming
 - CSS BEM naming convention
@@ -103,16 +103,16 @@ The assets folder in the frontend stores image icons that are distrubuted across
     - `textController.js`
   - `index.js`
 
-### Improvements
+## Improvements
 
-#### Bugs
+### Bugs
 
 Part of the backend includes a recursive function that generates all possible letter combinations based on the number input. There is a direct correlation between the length of the input and the latency of response from the backend, this follows the O(n) complexity. 
 
 Therefore, I found that inputting or deleting long words will result in the app hanging, especially in cases where buttons are pressed quickly due to the time taken to compute the entire word. Shorter words (up to 3 or 4 characters) perform best since they take less time.
 
 
-#### Future Implentations
+### Future Implentations
 
 - At the moment, the app doesn't support punctuations and presses on the 1 button are ignored so would be good to see how that's implemented into the app.
 - A Redux undo state impletation so deletion of characters wouldn't need to trigger API calls to fetch a list of words. Some form of a tracker could cache all the data that comes back and we could access that for previous states on delete. 
