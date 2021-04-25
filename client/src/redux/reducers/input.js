@@ -6,36 +6,54 @@ const initialState = {
   onScreenText: []
 }
 
-const inputReducer = (state = initialState, action) => { // pure function, keep API calls in app.js
+const inputReducer = (
+  state = initialState,
+  action) => {
+
+  const { number, onScreenText } = state
+
+  // last element of num arr and text arr
+  // remaining arr excluding last element of both arr
+  const lastNum = number[number.length - 1]
+  const lastText = onScreenText[onScreenText.length - 1]
+  const remainingNum = number.slice(0, number.length - 1)
+  const remainingText = onScreenText.slice(0, onScreenText.length - 1)
+
 
   switch (action.type) {
 
     case actions.INPUT_CHANGE:
       const { label } = action.payload
-      const { number, onScreenText } = state
 
-      if (/[0←]/.test(label) && (!number || number.length === 0)) { // prevents space and delete as first input
+      // return state since 1 does nothing
+      if (label === '1') {
+        return state
+      }
+
+      // prevents 0 and delete as first input
+      if (/[0←]/.test(label) &&
+        (!number || number.length === 0)) {
+
         return initialState
-      } 
+      }
 
-      if (!number || number.length === 0) { // case for the first valid input 
+      // first valid input 
+      if (!number || number.length === 0) {
+
         return {
           ...state,
           number: [label]
         }
       }
 
-      const lastNum = number[number.length - 1]
-      const lastText = onScreenText[onScreenText.length - 1]
-      const remainingNum = number.slice(0, number.length - 1)
-      const remainingText = onScreenText.slice(0, onScreenText.length - 1)
+      // deleting characters in input
+      if (label === '←') {
 
-      if (label === '←') { // deleting characters
-
+        // return arr after deletion and filters out empty elements
         function removeCharacter(arr, element) {
           return [...arr
             .concat(element.slice(0, -1))
-            .filter(el => el)] // filters out any empty strings after deletion
+            .filter(el => el)]
         }
 
         return {
@@ -47,28 +65,31 @@ const inputReducer = (state = initialState, action) => { // pure function, keep 
       }
 
       if (label === '0') {
-        if (!lastNum) return state // prevents additional space when already there
+
+        // prevents additional space when already there
+        if (!lastNum) return state 
+
         return {
           ...state,
           number: [...number, ''],
-          suggestedText: [], // remove suggested texts on start of new word
+
+          // remove suggested texts on start of new word
+          suggestedText: [], 
           onScreenText: [...onScreenText, '']
         }
       }
 
+      // default input change
+      // concat digit to last element of arr
       return {
         ...state,
         number: [...remainingNum.concat(lastNum + label)],
-      }  // default
+      }
 
 
     case actions.PROMISE_SUCCESS:
-      const { property, arr } = action.payload
-
-      return {
-        ...state,
-        [property]: arr
-      }
+      // return new state passed as function argument
+      return action.payload.obj
 
     default:
       return state

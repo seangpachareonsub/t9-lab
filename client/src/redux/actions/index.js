@@ -1,20 +1,15 @@
 import * as actions from './actionTypes'
 
-// action creators
-
-export const inputChange = e => ({ 
+export const inputChange = (e) => ({
   type: actions.INPUT_CHANGE,
   payload: {
     label: e.target.dataset.label
   }
 })
 
-
-
-export const promiseSuccess = (property, arr) => ({
+export const promiseSuccess = obj => ({
   type: actions.PROMISE_SUCCESS,
   payload: {
-    property,
-    arr
+    obj
   }
 })

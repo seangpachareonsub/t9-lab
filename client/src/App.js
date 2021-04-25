@@ -1,6 +1,6 @@
 import './App.css';
-import React, { useEffect, useState, useCallback } from 'react'
-import { useSelector, useDispatch, } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { promiseSuccess } from './redux/actions'
 import { CircularProgress } from '@material-ui/core';
 import axios from 'axios'
@@ -11,34 +11,52 @@ import StatusBar from './components/status-bar/StatusBar'
 function App() {
 
   const dispatch = useDispatch()
+
+  // states
+  const state = useSelector(state => state)
   const number = useSelector(state => state.number)
   const onScreenText = useSelector(state => state.onScreenText)
+
   const [responseIsLoading, setResponseIsLoading] = useState(false)
   const lastNum = number[number.length - 1]
 
-  
+
+  // function for api calls
   const handleRequest = (endpoint, body) => {
+
+    // renders visual aid for api call
     setResponseIsLoading(true)
 
-    return axios.post(endpoint, body)
+    return axios
+      .post(endpoint, body)
       .then(res => {
+
         const { data } = res
         const remainingTextElements = onScreenText.slice(0, onScreenText.length - 1)
 
         if (endpoint === '/suggestions') {
-          const lastWord = data[0].slice(0, lastNum.length) // first suggested word sliced at the input length
 
-          dispatch(promiseSuccess('onScreenText', [...remainingTextElements, lastWord]))
-          dispatch(promiseSuccess('suggestedText', data))
+          const lastWord = data[0].slice(0, lastNum.length)
+
+          dispatch(promiseSuccess({
+            ...state,
+            onScreenText: [...remainingTextElements, lastWord],
+            suggestedText: data
+          }))
+
         } else {
+
           const remainingNumElements = number.slice(0, number.length - 1)
 
-          dispatch(promiseSuccess('suggestedText', []))
-          dispatch(promiseSuccess('onScreenText', [...remainingTextElements, body.word, '']))
-          dispatch(promiseSuccess('number', [...remainingNumElements, data.toString(), '']))
+          dispatch(promiseSuccess({
+            onScreenText: [...remainingTextElements, body.word, ''],
+            suggestedText: [],
+            number: [...remainingNumElements, data.toString(), '']
+          }))
         }
 
         setResponseIsLoading(false)
+    
       })
       .catch(err => {
         setResponseIsLoading(false)
@@ -47,7 +65,8 @@ function App() {
   }
 
   useEffect(() => {
-    // no API call on initial render, no digits or if last element is ''
+
+    // no API call on initial render, if no digits or if last element is ''
     if (!number || number.length === 0 || !lastNum) return
 
     handleRequest('/suggestions', { input: lastNum })
@@ -61,9 +80,15 @@ function App() {
       <Screen />
       <Keypad
         responseIsLoading={responseIsLoading}
-        handleRequest={handleRequest} />
+        handleRequest={handleRequest}
+      />
 
-      {responseIsLoading && <CircularProgress className='progress' color='primary' />}
+      {responseIsLoading && (
+        <CircularProgress
+          className='progress'
+          color='primary'
+        />
+      )}
     </div>
   )
 }

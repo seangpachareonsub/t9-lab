@@ -1,14 +1,16 @@
 import React from 'react';
 import './Keypad.css';
+import microphone from '../../assets/microphone.png'
+import world from '../../assets/world.png'
 import { keys } from '../../constants/keys'
 import { useSelector, useDispatch } from 'react-redux'
 import { inputChange } from '../../redux/actions'
 
-const Keyboard = ({ 
-  handleRequest, 
-  responseIsLoading }) => {
+const Keyboard = ({ handleRequest }) => {
 
   const dispatch = useDispatch()
+
+  // states
   const onScreenText = useSelector(state => state.onScreenText)
   const suggestedText = useSelector(state => state.suggestedText)
 
@@ -20,9 +22,15 @@ const Keyboard = ({
         {suggestedText.map((word, i) => {
           return (
             <span key={i}
-              onClick={!responseIsLoading ? () => handleRequest('/auto-complete', { word }) : undefined}
+              onClick={() => handleRequest('/auto-complete', { word })}
               className='suggestion-bar__text'>
-              {word === onScreenText[onScreenText.length - 1] ? `"${word}"` : word}
+
+              {word === onScreenText[onScreenText.length - 1] ? (
+                `"${word}"`
+              ) : (
+                  word
+                )}
+
             </span>
           )
         })}
@@ -32,21 +40,18 @@ const Keyboard = ({
       <div className='keypad'>
 
         {keys.map((key, i) => {
+
           const { label, action } = key
+
           return (
             <div
               key={i}
-              className={`keypad__button ${['0', '←'].includes(label) && `keypad__button--${action}`}`}
               data-label={label}
-              onClick={(label !== '1' || !responseIsLoading) ? (e) => dispatch(inputChange(e)) : undefined}>
+              onClick={(e) => dispatch(inputChange(e))}
+              className={`keypad__button ${/[0←]/.test(label) && `keypad__button--${action}`}`}>
 
-              <h6>
-                {label}
-              </h6>
-
-              <small>
-                {action}
-              </small>
+              <h6> {label} </h6>
+              <small> {action} </small>
 
             </div>
           )
@@ -55,11 +60,11 @@ const Keyboard = ({
       </div>
 
       <div className="keypad__toolbar">
-        <img className='keypad__icons' src="https://www.flaticon.com/svg/vstatic/svg/3083/3083741.svg?token=exp=1619300906~hmac=cc3515c801a5a283c82bc49ff3afde30" alt="world" />
-        <img className='keypad__icons' src="https://www.flaticon.com/svg/vstatic/svg/1082/1082810.svg?token=exp=1619300952~hmac=2223233649c5a41bb3e455dc4a900ad5" alt="microphone" />
+        <img className='keypad__icons' src={world} alt="world" />
+        <img className='keypad__icons' src={microphone} alt="microphone" />
       </div>
 
-    </div>
+    </div >
   );
 };
 

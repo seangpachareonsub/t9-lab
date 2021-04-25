@@ -2,15 +2,15 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 99%;
   display: grid;
   grid-template-columns: 81% repeat(3, 5%);
   padding: 0.5rem 2rem;
-  column-gap: 6px;
+  column-gap: 7px;
 }
 
 .status-bar span {
-  font-size: 0.80rem;
+  font-size: 0.75rem;
   font-weight: bold;
 }
 

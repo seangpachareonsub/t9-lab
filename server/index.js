@@ -2,7 +2,7 @@ const Hapi = require('@hapi/hapi')
 const {
   handleSuggestText,
   handleAutoComplete
-} = require('./controllers/predictiveText')
+} = require('./controllers/textController')
 
 const init = async () => {
 

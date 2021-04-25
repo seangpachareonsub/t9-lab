@@ -1,33 +1,44 @@
 import React from 'react';
 import './StatusBar.css'
+import signal from '../../assets/signal.png'
+import wifi from '../../assets/wifi.png'
+import battery from '../../assets/battery.png'
 import moment from 'moment'
 
 const StatusBar = () => {
 
   const icons = [
     {
+      id: '1',
       alt: 'signal',
-      src: 'https://www.flaticon.com/svg/vstatic/svg/2313/2313339.svg?token=exp=1619223794~hmac=14786193cdd15dc3bc586b0286c83902'
+      src: signal
     },
     {
+      id: '2',
       alt: 'wifi',
-      src: 'https://www.flaticon.com/svg/vstatic/svg/254/254613.svg?token=exp=1619223766~hmac=0f7e8f4174aa1c8c184e224a67c11f26'
+      src: wifi
     },
     {
+      id: '3',
       alt: 'battery',
-      src: 'https://www.flaticon.com/svg/vstatic/svg/569/569467.svg?token=exp=1619223147~hmac=13b86c2a4ca122c9f7268b242b9e7b66'
+      src: battery
     }
   ]
 
   return (
     <div className='status-bar'>
 
-      <span> {moment().format('hh:mm')} </span>
+      <span> {moment().format('HH:MM')} </span>
 
-      {icons.map((icon, i) => {
-        const { alt, src } = icon
+      {icons.map(icon => {
+        const { alt, src, id } = icon
+
         return (
-          <img key={i} className='status-bar__img' src={src} alt={alt} />
+          <img key={id}
+            className='status-bar__img'
+            src={src}
+            alt={alt}
+          />
         )
       })}
 

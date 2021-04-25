@@ -1,11 +1,11 @@
 .keypad-container {
   flex: 1;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   align-items: center;
-  background-color: rgb(230, 230, 230);
+  background-color: white;
   border-bottom-right-radius: 44px;
   border-bottom-left-radius: 44px;
 }
@@ -16,7 +16,7 @@
   display: flex;
   position: relative;
   align-items: center;
-  padding: 0.3rem;
+  padding: 0.25rem;
   overflow-x: scroll;
 }
 
@@ -30,7 +30,8 @@
   min-width: 28%;
   text-align: center;
   overflow: hidden;
-  padding: 0.4rem 0;
+  text-overflow: ellipsis;
+  padding: 0.4rem;
   user-select: none;
   font-weight: 500;
   border-radius: 5px;
@@ -38,9 +39,8 @@
 
 .suggestion-bar__text:hover {
   cursor: pointer;
-  background-color: rgb(207, 207, 207);
+  background-color: rgb(235, 235, 235);
 }
-
 
 .keypad {
   width: 97%;
@@ -58,18 +58,17 @@
 .keypad__button {
   text-align: center;
   background-color: rgb(245, 245, 245);
-  border-radius: 5px;
+  border-radius: 10px;
   position: relative;
-  box-shadow: 0 4px 1px -2.25px rgb(175, 175, 175);
+  box-shadow: 0 4px 2px -2px rgb(175, 175, 175);
 }
 
 .keypad__button:active {
   transform: translateY(1.5px);
 }
 
-
 .keypad__button:hover {
-  background-color: rgb(237, 237, 237);
+  background-color: rgb(235, 235, 235);
   cursor: pointer;
   user-select: none;
 }
@@ -90,6 +89,7 @@
 }
 
 .keypad__button h6 {
+  font-weight: 400;
   position: absolute;
   top: 47%;
   left: 50%;
@@ -102,7 +102,7 @@
   pointer-events: none;
   position: absolute;
   bottom: 3px;
-  right: 3px;
+  right: 5px;
   font-size: 0.65rem;
 }
 
@@ -110,11 +110,10 @@
   display: flex;
   justify-content: space-between;
   transform: translateY(-12px);
-  width: 80%
+  width: 80%;
 }
 
 .keypad__icons {
   width: 20px;
   cursor: not-allowed;
 }
-
