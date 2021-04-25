@@ -1,8 +1,9 @@
 import './App.css';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { promiseSuccess } from './redux/actions'
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import axios from 'axios'
 import Screen from './components/screen/Screen'
 import Keypad from './components/keypad/Keypad'
@@ -17,8 +18,18 @@ function App() {
   const { number, onScreenText } = state
 
   const [responseIsLoading, setResponseIsLoading] = useState(false)
+  const [snackbarOpen, setSnackbarOpen] = useState(true)
   const lastNum = number[number.length - 1]
-  
+
+
+  useEffect(() => {
+    // no API call on initial render, if no digits or if last element is ''
+    if (!number || number.length === 0 || !lastNum) return
+
+    handleRequest('/suggestions', { input: lastNum })
+
+  }, [number])
+
 
   // function for api calls
   const handleRequest = (endpoint, body) => {
@@ -61,14 +72,14 @@ function App() {
       })
   }
 
-  useEffect(() => {
+  const Alert = props => {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
 
-    // no API call on initial render, if no digits or if last element is ''
-    if (!number || number.length === 0 || !lastNum) return
+  const handleSnackBarClose = () => {
+    setSnackbarOpen(false)
+  }
 
-    handleRequest('/suggestions', { input: lastNum })
-
-  }, [number])
 
 
   return (
@@ -86,8 +97,19 @@ function App() {
           color='primary'
         />
       )}
+
+      {snackbarOpen && (
+        <Snackbar open={snackbarOpen}
+          autoHideDuration={3000}
+          onClose={handleSnackBarClose}>
+          <Alert severity="info">
+            Click on the suggestions to auto-complete the word
+        </Alert>
+        </Snackbar>
+      )}
     </div>
   )
 }
 
 export default App;
+

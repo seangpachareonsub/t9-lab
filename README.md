@@ -2,6 +2,8 @@
 
 This is a small web app that emulates T9 predictive text. As the user types numbers into the input,predicted words will be shown.
 
+<img width='45%'  src='./.github/phone.png' />
+
 ## Getting Started
 
 This project was bootstrapped using the [Create React App](https://github.com/facebook/create-react-app) toolkit.
@@ -105,9 +107,9 @@ The assets folder in the frontend stores image icons that are distrubuted across
 
 ### Bugs
 
-Part of the backend includes a recursive function that generates all possible letter combinations based on the number input. There is a direct correlation between the length of the input and the latency of response from the backend, this follows the O(n) complexity. 
+Part of the backend includes a recursive function that generates all possible letter combinations based on the number input. There is a direct correlation between the length of the input and the latency of the response from the backend, this follows the O(n) complexity. 
 
-Therefore, I found that inputting or deleting long words will result in the app hanging, especially in cases where buttons are pressed quickly due to the time taken to compute the entire word. Shorter words (up to 3 or 4 characters) perform best since they take less time.
+Therefore, I found that inputting or deleting long words will result in the app hanging, especially in cases where buttons are pressed quickly due to the time taken for the API to respond. Shorter words (up to 5 characters) perform seamlessly since they take less time to compute.
 
 
 ### Future Implentations

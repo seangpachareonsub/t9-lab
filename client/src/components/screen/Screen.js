@@ -7,7 +7,7 @@ const Screen = () => {
   const onScreenText = useSelector(state => state.onScreenText)
 
   return (
-    <textarea className='screen' value={onScreenText.join(' ')} rows='10' readOnly />
+    <textarea className='screen' placeholder='Type a message...' value={onScreenText.join(' ')} rows='10' readOnly />
   );
 };
 
