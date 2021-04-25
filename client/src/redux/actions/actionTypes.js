@@ -1,0 +1,2 @@
+export const INPUT_CHANGE = 'INPUT_CHANGE'
+export const PROMISE_SUCCESS = 'PROMISE_SUCCESS'

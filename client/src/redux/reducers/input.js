@@ -1,3 +1,5 @@
+import * as actions from '../actions/actionTypes'
+
 const initialState = {
   number: [],
   suggestedText: [],
@@ -8,7 +10,7 @@ const inputReducer = (state = initialState, action) => { // pure function, keep 
 
   switch (action.type) {
 
-    case 'INPUT_CHANGE':
+    case actions.INPUT_CHANGE:
       const { label } = action.payload
       const { number, onScreenText } = state
 
@@ -60,7 +62,7 @@ const inputReducer = (state = initialState, action) => { // pure function, keep 
       }  // default
 
 
-    case 'PROMISE_SUCCESS':
+    case actions.PROMISE_SUCCESS:
       const { property, arr } = action.payload
 
       return {

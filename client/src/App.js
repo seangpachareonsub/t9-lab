@@ -1,6 +1,6 @@
 import './App.css';
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect, useState, useCallback } from 'react'
+import { useSelector, useDispatch, } from 'react-redux'
 import { promiseSuccess } from './redux/actions'
 import { CircularProgress } from '@material-ui/core';
 import axios from 'axios'
@@ -13,12 +13,11 @@ function App() {
   const dispatch = useDispatch()
   const number = useSelector(state => state.number)
   const onScreenText = useSelector(state => state.onScreenText)
-  const lastNum = number[number.length - 1]
   const [responseIsLoading, setResponseIsLoading] = useState(false)
+  const lastNum = number[number.length - 1]
 
-
+  
   const handleRequest = (endpoint, body) => {
-
     setResponseIsLoading(true)
 
     return axios.post(endpoint, body)
@@ -48,7 +47,6 @@ function App() {
   }
 
   useEffect(() => {
-
     // no API call on initial render, no digits or if last element is ''
     if (!number || number.length === 0 || !lastNum) return
 
@@ -64,6 +62,7 @@ function App() {
       <Keypad
         responseIsLoading={responseIsLoading}
         handleRequest={handleRequest} />
+
       {responseIsLoading && <CircularProgress className='progress' color='primary' />}
     </div>
   )
