@@ -21,6 +21,7 @@ This will start the backend server which runs on localhost:3001
 
 ```js
 cd client
+npm i
 npm start
 ```
 
