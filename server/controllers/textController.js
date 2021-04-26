@@ -1,6 +1,5 @@
 const words = require('../constants/words')
 const keys = require('../constants/keys')
-require('lodash.combinations')
 const _ = require('lodash')
 
 
