@@ -73,6 +73,7 @@ For the frontend, the components are stored in their own folders alongside indiv
 
 The assets folder in the frontend stores image icons that are distrubuted across the UI of the app.
 
+- `.github`
 - `client`
   - `public`
   - `src`
