@@ -14,6 +14,7 @@ To serve the app on your local machine, run the following commands:
 
 ```js
 git clone git@github.com:seangpachareonsub/t9-lab.git
+npm i
 npm start
 ```
 
