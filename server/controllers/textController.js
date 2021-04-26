@@ -1,5 +1,6 @@
 const words = require('../constants/words')
 const keys = require('../constants/keys')
+require('lodash.combinations')
 const _ = require('lodash')
 
 
@@ -38,24 +39,22 @@ exports.handleSuggestText = (request, h) => {
 
   const generateRecursion = arr => {
 
-    // base case for legnth 1 input
+    // base case for length 1 input
     if (arr.length === 1) {
       return arr[0]
-
-    } else {
-      const result = []
-      
-      // recur with the rest of array
-      const allCasesOfRest = generateRecursion(arr.slice(1)) 
-
-      for (const i in allCasesOfRest) {
-        for (const j in arr[0]) {
-          result.push(arr[0][j] + allCasesOfRest[i])
-        }
-      }
-
-      return result
     }
+
+    const result = []
+    // // recur with the rest of array
+    const allCasesOfRest = generateRecursion(arr.slice(1))
+
+    for (const i in allCasesOfRest) {
+      for (const j in arr[0]) {
+        result.push(arr[0][j] + allCasesOfRest[i])
+      }
+    }
+
+    return result
   }
 
   const findMatchingWords = arr => {
